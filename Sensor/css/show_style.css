@@ -1,0 +1,290 @@
+@charset "UTF-8";
+/*指定高度和宽度确定元素边框*/
+* {box-sizing: border-box}
+
+/*body元素样式设置*/
+body{
+    font-family: Arial;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+/*导航条样式设置*/
+.topnav{
+    overflow: hidden;
+    background-color: #333;
+}
+/*导航条链接设置*/
+.topnav a{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+/*导航链接颜色修改*/
+.topnav a:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+/*设置label*/
+label {
+    text-align: center;
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+
+}
+/*设置select*/
+ select{
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+ /*设置label的div块*/
+.col-label-25 {
+  float: left;
+  width: 25%;
+  margin-top: 40px;
+}
+/*设置select的div块*/
+.col-select-25 {
+  float: left;
+  width: 25%;
+  margin-top: 40px;
+}
+/*设置时间选择按钮*/
+.row button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 40px;
+}
+/* 响应式布局 layout - 在屏幕宽度小于 600px 时， 设置为上下堆叠元素 */
+@media screen and (max-width: 600px) {
+  .col-label-25, .col-select-25, #time_select_button {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* 清除浮动 */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*卡片设置*/
+.card{
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    margin-top: 30px;
+}
+/*假图表样式设置*/
+.fakechart{
+    /*background-color: #aaa;*/
+    /*padding: 20px;*/
+    height: 300px;
+    width: 100%;
+    border: 2px solid black;
+
+}
+
+/*汇总表格设置*/
+.tablesum{
+    margin-top: 10px;
+    width: 100%;
+    border: 2px solid #666666;
+    border-collapse: collapse;
+}
+.tablesum thead tr{
+    background-color: #333333;
+    color:#e0e0e0;
+}
+.tablesum tr{
+    background-color: #f1f1f1;
+}
+.tablesum td{
+    text-align: center;
+    border:1px solid #000 ;
+}
+.tablesum td:nth-child(1){
+    width: 15%;
+}
+.tablesum td:nth-child(2){
+    width: 15%;
+}
+.tablesum td:nth-child(3){
+    width: 15%;
+}
+.tablesum td:nth-child(4){
+    width: 25%;
+}
+.tablesum td:nth-child(5){
+    width: 15%;
+}
+.tablesum td:nth-child(6){
+    width: 15%;
+}
+
+/*弹出框的背景层设置*/
+#popBack{
+    display: none;
+    background-color: #B3B3B3;
+    /*position: absolute;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);/* 只支持IE6、7、8、9 */
+
+}
+/*弹出出框设置，包括关闭部分和内容部分*/
+#popBox {
+    display: none;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 80%;
+    border: 2px solid #6cabc5;
+    z-index:11;
+    overflow: auto;
+}
+#popBox .close{
+    overflow: hidden;
+    background-color: #6cabc5;
+    /*height: 50px;*/
+}
+#popBox .close a {
+    display: block;
+    float: right;
+    text-align: center;
+    text-decoration:none;
+    color: #F8F8F8;
+    padding: 14px 16px;
+}
+
+/*内容部分设置*/
+#popBox .content{
+    margin: 20px;
+}
+/*弹出窗当天数据表格设置*/
+.tableday{
+    margin-top: 10px;
+    width: 100%;
+    border: 2px solid #666666;
+    border-collapse: collapse;
+}
+.tableday thead tr{
+    background-color: #333333;
+    color:#e0e0e0;
+}
+.tableday tr{
+    background-color: #f1f1f1;
+}
+.tableday td{
+    text-align: center;
+    border:1px solid #000 ;
+}
+.tableday td:nth-child(1){
+    width: 20%;
+}
+.tableday td:nth-child(2){
+    width: 20%;
+}
+.tableday td:nth-child(3){
+    width: 40%;
+}
+.tableday td:nth-child(4){
+    width: 20%;
+}
+
+/*运行按钮div设置*/
+.runButtion{
+    margin-top: 20px;
+    width: 100%;
+    /*background-color: red;*/
+}
+.runButtion button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+
+    /*float: right;*/
+    /*margin-top: 40px;*/
+}
+/*当填数据处理结果表格展示*/
+.tabledayresult{
+    margin-top: 10px;
+    width: 100%;
+    border: 2px solid #666666;
+    border-collapse: collapse;
+}
+.tabledayresult thead tr{
+    background-color: #333333;
+    color:#e0e0e0;
+}
+.tabledayresult tr{
+    background-color: #f1f1f1;
+}
+.tabledayresult td{
+    text-align: center;
+    border:1px solid #000 ;
+}
+.tabledayresult td:nth-child(1){
+    width: 25%;
+}
+.tabledayresult td:nth-child(2){
+    width: 25%;
+}
+.tabledayresult td:nth-child(3){
+    width: 25%;
+}
+.tabledayresult td:nth-child(4){
+    width: 25%;
+}
+
+#pagiDiv{
+    float: right;
+    width:100%;
+    height: 50px;
+    /*border:1px solid #000 ;*/
+    margin-top: 30px;
+
+}
+#pagiDiv span{
+    /*background:#1e90ff;*/
+    border-radius: .2em;
+    /*padding:5px;*/
+    display:inline-block;
+    width:60px;
+    height:32px;
+    border:1px solid #CCC;
+    line-height:32px;
+    text-align:center;
+    color: black;
+    margin-top:10px;
+    text-decoration:none;
+
+}
+

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果展示页面</title>
+    <link rel="stylesheet" href="../css/show_style.css" />
+    <script src="../js/echarts.js"></script>
+    <script src="../js/yearmonthday.js"></script>
+    <script src="../js/show.js"></script>
+    <script src="../js/pagination.js"></script>
+    <!--<script src="../js/bootstrap-table.js"></script>-->
+    <!--<link rel="stylesheet" href="../css/bootstrap.css"/>-->
+</head>
+<body>
+<div class="topnav">
+    <a href="#">感知结果展示页</a>
+</div>
+
+<div class="card">
+    <h2>请选择感知的时间范围</h2>
+    <div class="row">
+        <div class="col-label-25">
+            <label>起始时间段：</label>
+        </div>
+        <div class="col-select-25">
+            <select id="start_year" onchange="showDate('start')">
+                <!--<option value="2020">2020</option>-->
+                <!--<option value="2019"selected>2019</option>-->
+                <!--<option value="2018">2018</option>-->
+            </select>
+        </div>
+        <div class="col-select-25" onchange="showDate('start')">
+            <select id="start_month">
+            </select>
+        </div>
+        <div class="col-select-25">
+            <select id="start_day">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-label-25">
+            <label>结束时间段：</label>
+        </div>
+        <div class="col-select-25">
+            <select id="end_year" onchange="showDate('end')">
+                <!--<option value="2020">2020</option>-->
+                <!--<option value="2019"selected>2019</option>-->
+                <!--<option value="2018">2018</option>-->
+            </select>
+        </div>
+        <div class="col-select-25" onchange="showDate('end')">
+            <select id="end_month">
+            </select>
+        </div>
+        <div class="col-select-25">
+            <select id="end_day">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <button id="time_select_button" onclick="time_select(false)">确定</button>
+    </div>
+</div>
+
+<div class="card">
+    <h1 style="text-align: center">该段时间感知结果汇总</h1>
+    <div class="tablecontainer">
+        <table id='table_sum' class="tablesum">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>变化功能</td>
+                <td>变化类型</td>
+                <td>数据内容</td>
+                <td>数据来源</td>
+                <td>时间</td>
+            </tr>
+            </thead>
+
+            <tbody id="tbody_sum">
+            <!-- 动态增添的内容-->
+            <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>VR全景预览</td>-->
+                <!--<td>新增</td>-->
+                <!--<td>为了让客户在入住前更好地了解酒店，飞猪退出了酒店VR全景，让用户体验感爆棚，快来入住吧！</td>-->
+                <!--<td>新闻</td>-->
+                <!--<td>2019-11-30</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+        <div id="pagiDiv">
+            <div style="margin-left: 70%">
+                <span id="spanFirst">首页</span>
+                <span id="spanPre">上一页</span>
+                <span id="spanNext">下一页</span>
+                <span id="spanLast">尾页</span>
+                第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+            </div>
+
+        </div>
+    </div>
+    </div>
+</div>
+<div class="card">
+    <h2>新闻数据感知结果</h2>
+    <div id="news_heatmap" class="fakechart"></div>
+    <h4>示意图说明：<br>(1)横轴为月份，纵轴为星期，每个小方块表示一天；<br>(2)红色表示新增了功能，绿色表示去除了功能，白色表示无任何变化。</h4>
+    <!--<p>图表点击事件模拟：<a href="javascript:void (0)" onclick="">请点击这里</a></p>-->
+    <div></div>
+</div>
+
+<div class="card">
+    <h2>评论数据感知结果</h2>
+    <div id="views_heatmap" class="fakechart">图表</div>
+    <h4>示意图说明：<br>(1)横轴为月份，纵轴为星期，每个小方块表示一天；<br>(2)红色表示新增了功能，绿色表示去除了功能，白色表示无任何变化。</h4>
+</div>
+
+
+<!--弹出窗页面结构，由弹出框和背景层组成，这两个div和原始要页面是在同一个html文件中，
+首先通过设置display：None来让这两个div不显示，
+然后通过点击链接和关闭按钮绑定事件实现弹出框的隐藏与显示-->
+<!--背景层-->
+<div id="popBack"></div>
+<!--弹出框(包含关闭部分和内容部分)-->
+<div id="popBox">
+    <div class="close"><a href="javascript:void (0)" onclick="closeBox()">关闭</a></div>
+    <div class="content">
+        <h2 style="text-align: center">感知中间结果展示</h2>
+        <h5>(1)当天数据：</h5>
+        <table id ='table_day_content' class="tableday">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>时间</td>
+                <td>数据内容</td>
+                <td>数据来源</td>
+            </tr>
+            </thead>
+            <tbody id="tbody_content">
+            <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>2019-10-30</td>-->
+                <!--<td>为了更好的服务客户</td>-->
+            <!--</tr>-->
+            </tbody>
+
+        </table>
+        <h5>(2)如果你想对当天数据进行处理，请点击下方按钮：</h5>
+        <div class="runButtion" onclick="processbutton_click()"><button>感知处理</button></div>
+        <h5>(3)当天数据处理结果：</h5>
+        <table id='table_day_result' class="tabledayresult" style="display: none">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>时间</td>
+                <td>变化功能</td>
+                <td>变化类型</td>
+            </tr>
+            </thead>
+            <tbody id="tbody_result">
+            <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>2019-10-30</td>-->
+                <!--<td>为了更好的服务客户</td>-->
+                <!--<td>新增</td>-->
+            <!--</tr>-->
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+<script>
+    //初始化起始时间段选择下拉框
+    yearMonthDayInit("start");
+    yearMonthDayInit("end");
+
+    //获取select页面传递过来的service_value参数
+    var thisURL = document.URL;
+    var getval =thisURL.split('?')[1];
+    var service = getval.split("=")[1];
+    console.log("service："+service);
+    //根据上一个页面传递过来的service参数，请求url=-/sensor+sevice,返回服务的全部数据,是一个全局变量。
+    url =  'http://122.51.81.204:8005/sensor/getdata/'+service;
+    httprequest = new XMLHttpRequest();
+    httprequest.open("GET",url);
+    httprequest.send();
+    var service_data = [];
+    httprequest.onreadystatechange = function(){
+        if(httprequest.readyState == 4){
+            if(httprequest.status == 200){
+                console.log("response_text:"+httprequest.responseText);
+                service_data = JSON.parse(httprequest.responseText);
+
+                //在得到返回数据之后，再初始化tablesum、heatmap
+                time_select(true);
+                console.log("service_data:"+service_data[0]);
+            }
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>

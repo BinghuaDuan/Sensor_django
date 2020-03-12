@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择感知对象</title>
+    <link rel="stylesheet" href="../css/select_style.css">
+</head>
+<body>
+<div class="topnav">
+    <a href="#">服务对象选择页</a>
+</div>
+<div class="card">
+    <h1 style="text-align: center">---  请选择您需要感知的跨界服务  ---</h1>
+    <div class="container" style="height: 400px">
+        <form>
+            <fieldset style="border: 2px solid black">
+                <legend >感知服务对象选择</legend>
+                <div class="row">
+                    <div class="col-25">
+                        <label>请选择跨界服务的服务提供商：</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="select_provider" id="provider" onchange="Change_second_selectwords()">
+                            <option value="p1" selected>飞猪</option>
+                            <option value="p2">村淘</option>
+                            <option value="p3">盒马鲜生</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label>请选择服务提供商提供的服务类型：</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="select_service" id="service">
+                            <option value="hotel" selected>酒店服务</option>
+                            <option value="views">景点服务</option>
+                            <option value="trip">出行服务</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" onclick="form_submit()">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>
+<script>
+   function form_submit(){
+       var select_service = document.getElementById("service");
+       if(select_service.options.length){
+          var selectedindex = select_service.selectedIndex;
+          console.log("selectindex"+selectedindex);
+          var value = select_service.options[selectedindex].value;
+          console.log("value:"+value);
+
+          if(value == "hotel" || value == "views" || value == "trip" ){
+              window.location.href = 'show.html'+'?service_value='+value;
+              window.event.returnValue=false
+          }
+       }
+
+   }
+
+   function Change_second_selectwords(){
+       var first_keywords = {};
+       //定义第一个下拉列表对应的第二个下拉列表选项集合
+        first_keywords['p1'] = ['hotel', 'view', 'trip'];
+        var service_name = ['酒店服务','景点服务','出行服务'];
+        first_keywords['p2'] = [];
+        first_keywords['p3'] = [];
+       //根据id找到两个下拉框对象
+        var target1 = document.getElementById("provider");
+        var target2 = document.getElementById("service");
+
+        //得到第一个下拉框的内容
+        var target1_selected = target1.options[target1.selectedIndex].value;
+        //清空第二个下拉框
+        while (target2.options.length) {
+            target2.remove(0);
+        }
+        //根据第一个下拉框的内容找到对应的列表
+       console.log("target1_select:"+target1_selected);
+        var target2_initial_list = first_keywords[target1_selected];
+        if (target2_initial_list) {
+            for (var i = 0; i < target2_initial_list.length; i++) {
+                var item = new Option(target2_initial_list[i], i);
+                //将列表中的内容加入到第二个下拉框
+                target2.options.add(item);
+                target2.options[i].text= service_name[i]
+            }
+        }
+   }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/*指定高度和宽度确定元素边框*/
+* {box-sizing: border-box}
+
+/*body元素的样式设置*/
+body{
+    font-family: Arial;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+/*头部设置*/
+.header{
+    padding: 30px;
+    text-align: center;
+    background: white;
+}
+
+/*头部标题设置*/
+.header h1{
+    font-size: 50px;
+}
+
+/*导航条样式设置*/
+.topnav{
+    overflow: hidden;
+    background-color: #333;
+}
+
+/*导航条链接设置*/
+.topnav a{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/*导航链接颜色修改*/
+.topnav a:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+/*左边一列*/
+.leftcolumn{
+    float: left;
+    width: 75%;
+}
+
+/*右边一列*/
+.rightcolumn{
+    float: left;
+    width: 25%;
+    background-color: #f1f1f1;
+    padding-left: 20px;
+}
+
+/*假图像部分*/
+.fakeimg{
+    background-color: #aaa;
+    padding: 20px;
+    width: 100%;
+}
+
+/*文章卡片效果*/
+.card{
+    background-color: white;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/*行后面清除浮动*/
+.row:after{
+    content: '清除浮动';
+    display: table;
+    clear: both;
+}
+/*底部*/
+.footer{
+    padding:20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+}
+
+/*响应式布局-当屏幕尺寸小于800px时，左右两列布局改为上下两列布局*/
+@media screen and (max-width: 800px){
+    .leftcolumn, .rightcolumn{
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/*响应式布局-当屏幕尺寸小于400px时，导航条布局改为上下布局*/
+@media screen and (max-width: 400px){
+    .topnav a{
+        float: none;
+        width: 100%;
+    }
+}
+
+
